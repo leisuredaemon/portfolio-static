@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#3b82f6">
+    <title>Charan SV - Portfolio</title>
+    <link rel="stylesheet" href="styles.css?v=27">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-section">
+                    <img src="images/profile.jpg" alt="Charan SV Profile Picture" class="profile-image">
+                    <div class="profile-info">
+                        <h1 class="profile-name">Charan SV</h1>
+                        <p class="profile-title">AI/Data Enthusiast</p>
+                        <div class="profile-links">
+                            <a href="mailto:charanvenkatareddy678@gmail.com" class="profile-link">
+                                <span class="profile-icon">📧</span>
+                                <span>charanvenkatareddy678@gmail.com</span>
+                            </a>
+                            <a href="tel:+919380411062" class="profile-link">
+                                <span class="profile-icon">📱</span>
+                                <span>+91 93804 11062</span>
+                            </a>
+                            <a href="https://linkedin.com/in/yourprofile" class="profile-link" target="_blank">
+                                <span class="profile-icon">💼</span>
+                                <span>linkedin.com/in/yourprofile</span>
+                            </a>
+                            <a href="https://github.com/charan11sv/" class="profile-link" target="_blank">
+                                <span class="profile-icon">💻</span>
+                                <span>github.com/charan11sv</span>
+                            </a>
+                            <div class="profile-link">
+                                <span class="profile-icon">📍</span>
+                                <span>Bangalore, India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p class="about-text">
+                I am a Computer Science graduate with a strong passion for Data Science, Machine Learning, and AI integration. Over time, I have actively upskilled myself by building projects across diverse domains including finance, healthcare, and real-world dataset creation. My work spans from implementing research papers and customizing them for specific applications to conducting a wide range of experiments aimed at understanding the behavior of data under different conditions.
+            </p>
+            <p class="about-text">
+                Beyond academic exploration, I have gained hands-on experience in developing end-to-end solutions, tailoring models to unique problem spaces, and addressing practical challenges in applying ML/AI to real-world scenarios. Currently, I am working on multiple Generative AI projects, focusing on exploring its feasibility and limitations in real-world applications. This combination of research-driven experimentation and solution-oriented project work has equipped me with the ability to bridge the gap between theoretical models and their effective implementation.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Navigation Section -->
+    <section class="section navigation dark">
+        <div class="container">
+            <h2 class="section-title">How to Navigate This Site</h2>
+            <div class="nav-grid">
+                <div class="nav-item" onclick="scrollToSection('current-projects')">
+                    <div class="nav-icon"></div>
+                    <h3>Current Projects</h3>
+                    <p>Active work in progress</p>
+                </div>
+                <div class="nav-item" onclick="scrollToSection('ml-data-science')">
+                    <div class="nav-icon"></div>
+                    <h3>ML & Data Science</h3>
+                    <p>Research & experimentation projects</p>
+                </div>
+                <div class="nav-item" onclick="scrollToSection('generative-ai')">
+                    <div class="nav-icon"></div>
+                    <h3>Generative AI</h3>
+                    <p>API implementations & model usage</p>
+                </div>
+                <div class="nav-item" onclick="scrollToSection('my-datasets')">
+                    <div class="nav-icon"></div>
+                    <h3>My Datasets</h3>
+                    <p>Custom dataset creations</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Projects Section -->
+    <div id="current-projects">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Current Projects</h2>
+                <div class="section-description">
+                    <strong>Active Work in Progress</strong><br>
+                    These are the projects I'm currently working on or still in progress. They represent my latest efforts in machine learning, data science, and generative AI.
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card-link" onclick="openProjectModal('genai-1')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AST-Guided Patch Generation</h3>
+                                <p class="project-description">It implements an end-to-end agent that locates, edits, and verifies code fixes for real GitHub issues (SWE-bench style) under strict constraints (no internet, open weights, ≤30 minutes per served issue).</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/Konwinski-submission" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/code/charansv/konwinski-sub-2" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('genai-2')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AI Induced E-commerce site</h3>
+                                <p class="project-description">Trying out features for AI/LLM induced search, navigation and recommendation for E-commerce applications</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/ai-induced-ecommerce-site" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('genai-3')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AI Based Social media site</h3>
+                                <p class="project-description">Trying out the approach of having custom algorithms for each user using the llms and optimized search indexing and querying.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/SM_2" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ML & Data Science Section -->
+    <div id="ml-data-science">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">ML & Data Science</h2>
+                <div class="section-description">
+                    <strong>Research Implementation & Experimentation Projects</strong><br>
+                    This section showcases my work in machine learning, data science, and statistical analysis, covering a wide range of projects designed to explore the application of ML and DS across different industries and domains. I have worked on research paper implementations, explored new architectures, and conducted experiments to better understand data behavior and model performance. 
+                    <br><br>
+                    My work includes building and evaluating custom models such as GNN-based autoencoders and cluster-based GNNs, as well as adapting and fine-tuning research paper models for domain-specific applications. I have also conducted extensive experiments on stock market data with deep feature engineering informed by domain knowledge. In addition, I have explored explainable AI techniques, real-world data extraction, model tuning, ensemble methods, and unsupervised learning tasks alongside predictive modeling. 
+                    <br><br>
+                    To push experimentation further, I implemented data augmentation and generation techniques, including CTGAN, and performed detailed investigations into the effectiveness of these methods. This hands-on experimentation has allowed me to combine research-driven approaches with practical insights for solving complex problems.
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card-link" onclick="openProjectModal('ml-4')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">ClusterGAN for Regime Discovery on Indian Stocks (NSE)</h3>
+                                <p class="project-description">I adapted ClusterGAN from ClusterGAN paper to unlabeled NSE stock data to discover market regimes directly from high-dimensional features (OHLCV, indicators, sentiment, macro, global indices, FX/commodities). I trained G/D/E with WGAN-GP and latent consistency, swept latent std & clipping, explored cluster counts K ∈ [2, 100], and compared against K-Means. </p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/stock-market/tree/main/ClusterGAN%20Implementation%20on%20Stocks" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/code/charansv/stock-cluster-gan-1" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('ml-5')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Multi-Horizon Stock Forecasting</h3>
+                                <p class="project-description">I created a large-scale stock market dataset covering almost all NSE-listed companies with daily data and over 80 engineered features spanning technical indicators, sentiment, macroeconomic, and global signals. Using this dataset, I built predictive models (LightGBM, early Transformer prototypes) and multi-horizon forecasts, while also simulating trades with realistic backtesting. The project provides a robust foundation for future hybrid ensemble models, portfolio optimization, and reinforcement learning–based trading strategies.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/stock-market/" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('ml-7')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Conventional + Custom GNN based auto encoders for fraud detection</h3>
+                                <p class="project-description">Testing both conventional supervised learning techniques and my own custom GNN-based autoencoders for credit-card fraud detection and comparing its performance against traditional models from various studies.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/credit-fraud" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card-link" onclick="openProjectModal('ml-8')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Testing with Custom Cluster based GNN Architectures</h3>
+                                <p class="project-description">Goal : Compare multiple clustering techniques on a Benchmark dataset (Here Telco Churn dataset), understand which K (number of clusters) is appropriate for each method and understand specifically each clustering method's performance on the dataset and understand the differences and also derive insights out of it, and then propose & evaluate a custom cluster-aware GNN for the prediction and see if the custom built architecture helps in improving the performance and also if can capture the underlying patterns well and better than traditional methods like lgbm, random forest, vanilla GNNs and prove theortically that adding cluster info in the prediction improves the prediction accuracy.The goal was to make the GNNs capture the underlying patterns that can be captured with specific clustering techniques. With the insights we gathered on the performance of all the clustering techniques against the dataset and applying the same clusterng methods on the GNN we were able to derive the exact or most appropriate business factors of the nature that were resposible for the improvement of the performance which the vanilla methods or techniques failed to capture .</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/custom-cluster-based-GNN-architectures-on-churn-data" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('ml-6')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Synthetic Data Augmentation using CTGAN</h3>
+                                <p class="project-description">This repository documents an extensive set of experiments to generate synthetic data for a benchmark dataset using CTGAN.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/Data-augmentation-using-CTGAN" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('ml-3')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">CIBMTR - Survival Analysis</h3>
+                                <p class="project-description">My solution to CIBMTR Kaggle competition. The goal was to Rank patients by post-HCT event-free survival (EFS) risk, where events include EFS-defined adverse outcomes; censoring indicates incomplete follow-up.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/CIBMTR-survival-analysis/" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card-link" onclick="openProjectModal('ml-2')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Indian Real Estate Price Pipeline</h3>
+                                <p class="project-description">Goal. Build a fully reproducible pipeline that scrapes listings from popular Indian real-estate portals, constructs a clean, analysis-ready dataset, performs exploratory analysis and outlier handling, and trains models to power a price (monthly rent) estimator.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/Bangalore-real-estate" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/code/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card-link" onclick="openProjectModal('ml-1')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Credit Score Prediction with XAI techniques</h3>
+                                <p class="project-description">Credit Score Prediction with XAI — Built a high-accuracy credit score regressor from 304 numeric features using rigorous missing-data analysis (MCAR/MAR/MNAR), MICE imputation, feature selection (RFE), and strong baselines with LightGBM.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/credit-score-prediction-with-XAI-techniques/" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/code/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Generative AI Section -->
+    <div id="generative-ai">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Generative AI</h2>
+                <div class="section-description">
+                    <strong>API Implementations & Model Usage</strong><br>
+                    This section highlights my work with generative AI technologies, including LLM implementations, API integrations, and creative applications of AI models.
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card-link" onclick="openProjectModal('genai-1')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AST-Guided Patch Generation</h3>
+                                <p class="project-description">It implements an end-to-end agent that locates, edits, and verifies code fixes for real GitHub issues (SWE-bench style) under strict constraints (no internet, open weights, ≤30 minutes per served issue).</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/Konwinski-submission" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/code/charansv/konwinski-sub-2" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('genai-2')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AI Induced E-commerce site</h3>
+                                <p class="project-description">Trying out features for AI/LLM induced search, navigation and recommendation for E-commerce applications</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/ai-induced-ecommerce-site" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('genai-3')">
+                        <div class="project-card">
+                            <div class="ongoing-badge">In Progress</div>
+                            <div class="project-content">
+                                <h3 class="project-title">AI Based Social media site</h3>
+                                <p class="project-description">Trying out the approach of having custom algorithms for each user using the llms and optimized search indexing and querying.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/SM_2" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- My Datasets Section -->
+    <div id="my-datasets">
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">My Datasets</h2>
+                <div class="section-description">
+                    <strong>Custom Dataset Creations</strong><br>
+                    This section highlights my work in creating and curating custom datasets for various machine learning and data science tasks. These projects demonstrate my ability to gather, preprocess, and structure data, often involving web scraping, API integrations, or complex transformations to build valuable resources for analysis and model training.
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card-link" onclick="openProjectModal('dataset-1')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Indian Stock Market & News Feature Factory — Modeling-Ready Parquet with 80+ Engineered Signals</h3>
+                                <p class="project-description">Build a modeling-ready market dataset by combining equity price data (NSE/BSE) with news-driven sentiment and 80+ engineered features.</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/stock-market/tree/main/Dataset%20creation" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                    <a href="https://www.kaggle.com/datasets/charansv/nse-stock-data-with-sentiment-and-80-features/data" target="_blank" rel="noopener noreferrer" class="project-link">Dataset</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('dataset-4')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Research paper text extraction for finetuning</h3>
+                                <p class="project-description">This was used only for private educational and research purposes and never redistributed.</p>
+                                <div class="project-links">
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                    <div class="privacy-notice">Private Dataset - For educational and research purposes only</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('dataset-2')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Bangalore Real Estate Data</h3>
+                                <p class="project-description">Build a fully reproducible pipeline that scrapes listings from popular Indian real-estate portals.(was used only for private educational and research purposes and hence not redistributed)</p>
+                                <div class="project-links">
+                                    <a href="https://github.com/charan11sv/Bangalore-real-estate" target="_blank" rel="noopener noreferrer" class="project-link">GitHub</a>
+                                    <a href="https://www.kaggle.com/charansv/" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                    <div class="privacy-notice">Private Dataset - For educational and research purposes only</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-link" onclick="openProjectModal('dataset-3')">
+                        <div class="project-card">
+                            <div class="project-content">
+                                <h3 class="project-title">Amazon products dataset</h3>
+                                <p class="project-description">Extraction amazon products dataset for the LLM induced E-commerce recommendation that we are working on. (was used only for private educational)</p>
+                                <div class="project-links">
+                                    <a href="https://www.kaggle.com/code/charansv/amazon-products-dataset" target="_blank" rel="noopener noreferrer" class="project-link">Kaggle</a>
+                                    <div class="privacy-notice">Private Dataset - For educational and research purposes only</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProjectModal()">&times;</span>
+            <div id="projectDetails"></div>
+        </div>
+    </div>
+
+    <script src="script.js?v=11"></script>
+</body>
+</html>

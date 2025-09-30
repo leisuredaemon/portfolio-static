@@ -1,0 +1,512 @@
+// Test function
+function testJS() {
+    alert('JavaScript is working!');
+    console.log('JavaScript test function called');
+    console.log('openProjectModal function exists:', typeof openProjectModal);
+    console.log('Projects object exists:', typeof projects);
+}
+
+// Immediate test
+console.log('Script loading...');
+console.log('testJS function defined:', typeof testJS);
+
+// Project data
+const projects = {
+  "genai-1": {
+    "title": "AST-Guided Patch Generation",
+    "description": "It implements an end-to-end agent that locates, edits, and verifies code fixes for real GitHub issues (SWE-bench style) under strict constraints (no internet, open weights, ≤30 minutes per served issue).",
+    "category": "generative-ai",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/Konwinski-submission",
+      "kaggle": "https://www.kaggle.com/code/charansv/konwinski-sub-2",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": true,
+    "order": 0,
+    "detailedContent": "Konwinski Prize — AST-Guided Patch Generation (Kaggle Competition)\n1. Problem\n\nThe Kaggle Konwinski Prize competition challenged participants to design an AI agent capable of automatically fixing real GitHub issues (SWE-bench style).\n\nKey constraints:\n\nNo internet access during scoring.\n\nOpen-source weights and code only.\n\n≤ 30 minutes runtime per issue.\n\nSubmissions had to either:\n\nOutput a valid unified diff patch, or\n\nExplicitly skip (since a wrong patch was penalized more than skipping).\n\n  These constraints made the task extremely challenging, testing the ability to build a robust, conservative, end-to-end patching system under real-world limitations.\n\n2. My Solution\n\nI developed a multi-stage agent, implemented in a Kaggle notebook, to locate, edit, and verify code fixes safely. The approach combined LLMs with AST-guided context construction and strict validation to maximize correctness while minimizing false positives.\n\nSystem Workflow:\n\nLocate suspect lines — LLM extracts two literal code lines (error + preceding line).\n\nSearch & filter — grep repository for those lines, then apply adjacency filter (±1 line).\n\nFile selection — second LLM ranks and selects the most relevant files.\n\nContext construction — AST-guided backward tracer gathers surrounding code, imports, definitions, and scopes.\n\nPatch synthesis — LLM generates a unified diff patch.\n\nMechanical validation — verify patch format with unidiff parse + patch --dry-run.\n\nSelf-verification — multiple LLM judges vote Yes/No; majority approval is required.\n\nFinal decision — submit patch or safely skip if uncertain.\n\n  The architecture was deliberately conservative:\n\nSkipping > wrong fixes, in line with competition scoring rules.\n\n3. Techniques & Approaches\n\nMulti-agent LLM pipeline — separated roles (locator, selector, generator, judge) to reduce error compounding.\n\nAST-guided context extraction — surgical backward tracing of definitions, imports, and scopes for compact yet high-signal prompts.\n\nUnified diff generation & validation — enforced strict compliance with diff format + dry-run application.\n\nVoting-based verification — redundancy through multiple LLM judges to reduce false positives.\n\nTime & token budgeting — runtime tracking and token accounting to stay within 30 minutes/issue.\n\nSkip logic — conservative design to maximize overall score by avoiding penalties.\n\n4. Skills Demonstrated\n\nAI/ML engineering — designing LLM-driven repair agents.\n\nProgram analysis — AST parsing, scope tracing, and dependency resolution.\n\nSystems design — modular pipeline with safety checks and fallback logic.\n\nPrompt engineering — precise, minimal, and robust prompt templates.\n\nSoftware validation — enforcing patch correctness mechanically before submission.\n\nOptimization under constraints — careful runtime and resource management.\n\n5. Technologies Used\n\nPython 3.11 — core implementation (competition runtime).\n\nvLLM — efficient inference with open-weight LLMs.\n\nunidiff + GNU patch — patch parsing and dry-run validation.\n\npandas / polars — structured logging and diagnostics.\n\nast (Python stdlib) — abstract syntax tree parsing for context tracing.\n\nKaggle evaluation API — issue streaming and scoring integration.\n\n6. Impact\n\nThis project demonstrates how to build a production-style AI coding agent that can autonomously repair real-world repositories while respecting strict runtime and correctness constraints.\n\nIt highlights expertise in:\n\nLLM orchestration\n\nSoftware engineering\n\nProgram analysis\n\nOptimization under constraints\n\nUltimately, it shows how competition-style challenges can evolve into practical AI-assisted tools for large-scale software maintenance.\n\nKaggle Notebook :\n\nhttps://www.kaggle.com/code/charansv/konwinski-sub-2"
+  },
+  "genai-2": {
+    "title": "AI Induced E-commerce site",
+    "description": "Trying out features for AI/LLM induced search, navigation and recommendation for E-commerce applications",
+    "category": "generative-ai",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/ai-induced-ecommerce-site",
+      "kaggle": "",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": true,
+    "order": 1,
+    "detailedContent": "#  AI-Powered Multi-Modal Product Search  \n\n##  Project Overview  \nThis project aims to build an **AI-driven product discovery platform** that allows users to search for products in a **human-like, intuitive way**. Instead of relying only on traditional keyword search, the system supports:  \n\n- **Natural language search** → Users can describe what they need (even vaguely) and receive product suggestions.  \n- **Image-based search** → Users can upload an image to find visually similar products or related categories.  \n- **Hybrid understanding** → The AI bridges vague human descriptions or visual cues to the actual products available in the inventory.  \n\n---\n\n##  Original Project Plan  \n\nAt the start, the project was designed to include the following phases:  \n\n### **Phase 1 – Core Search System**  \n- Build **natural language query processing** using an LLM.  \n- Enable **web search + product page extraction** for supplementing vague queries.  \n- Connect processed results with the **local product database**.  \n\n### **Phase 2 – Image Search Integration**  \n- Use **Google Cloud Vision API** to extract labels, objects, and features from user-uploaded images.  \n- Pass extracted features to the LLM to generate product category mappings.  \n- Add **direct image similarity search** using open-source models.  \n\n### **Phase 3 – Multi-Modal Fusion**  \n- Combine image features and text descriptions to improve product recommendations.  \n- Handle **ambiguous inputs** (e.g., “something cozy to wear at home” or uploading a vague lifestyle image).  \n\n### **Phase 4 – User Interface (UI)**  \n- Design and implement an **intuitive UI** supporting text input, image upload, and results display.  \n- Add navigation features (categories, filters, sorting).  \n\n### **Phase 5 – Deployment & Scaling**  \n- Deploy application to a scalable cloud platform.  \n- Optimize APIs and database queries for performance.  \n- Add personalization features (user history, preferences).  \n\n---\n\n##  Progress So Far  \n\n###  Implemented Features  \n1. **Natural Language Search**  \n   - Accepts vague/free-form queries.  \n   - LLM reformulates queries into structured search.  \n   - Performs **web search → product page parsing → local database matching**.  \n\n2. **Image-Based Search (Vision API Integration)**  \n   - Extracts attributes and objects from uploaded images using **Google Cloud Vision**.  \n   - Converts extracted features into descriptive queries for the LLM.  \n   - Maps results to available product categories.  \n\n3. **Direct Image Similarity Search**  \n   - Implemented using **open-source image embedding models**.  \n   - Matches uploaded images with product images in the inventory.  \n\n### ⚙️ Tech Stack  \n- **OpenAI API** → Natural language understanding & query generation.  \n- **Google Cloud Vision API** → Image feature extraction.  \n- **Custom Web Scraper** → Retrieves product details for query matching.  \n- **Open-source Image Models** → Embedding-based similarity search.  \n- **Database (Inventory)** → Product categories and metadata.  \n\n---\n\n##  Upcoming Updates  \n\n-  **Fully Functional UI** (interactive product browsing & hybrid search).  \n-  **App Deployment** (cloud hosting & backend integration).  \n-  **Search Optimization** (improved embeddings, faster query handling).  \n-  **Enhanced Navigation** (filters, categories, personalization).  \n\n---\n\n##  Summary  \n\nThe project has successfully implemented its **core search engine** with **natural language and image-based queries**. By combining **LLMs, computer vision, and database matching**, we now have a foundation for a **multi-modal, intelligent product discovery platform**.  \n\nThe upcoming focus will be on **UI development, deployment, optimization, and navigation features**, eventually evolving into a **scalable e-commerce-ready solution**.  \n"
+  },
+  "genai-3": {
+    "title": "AI Based Social media site",
+    "description": "Trying out the approach of having custom algorithms for each user using the llms and optimized search indexing and querying.",
+    "category": "generative-ai",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/SM_2",
+      "kaggle": "",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": true,
+    "order": 2,
+    "detailedContent": "##  Project Overview  \nThis project aims to build a **social media platform** with a unique feature:  \n- Users can **describe in natural language** what kind of feed they want.  \n- The system uses **LLMs + optimized search indexing and querying** to generate a **dynamic, personalized feed** that adapts to the user’s request.  \n- This moves beyond static algorithms or generic personalization, giving users **direct control** over how their content is curated.  \n\n---\n\n##  Original Project Plan  \n\nThe project was designed to include the following phases:  \n\n### **Phase 1 – Core Social Media Functionality**  \n- User onboarding and authentication.  \n- Basic profile setup and management.  \n- Post creation and interactions (likes, comments, media upload).  \n\n### **Phase 2 – Baseline Feed Framework**  \n- Implement a simple feed (e.g., chronological or popularity-based).  \n- Build indexing and querying mechanisms for content retrieval.  \n\n### **Phase 3 – Natural Language Feed Customization**  \n- Allow users to type in what kind of feed they want (e.g., “more fitness content,” “fewer political posts”).  \n- LLM interprets the request → generates a query strategy → retrieves relevant posts.  \n- Feed updates dynamically based on user instructions.  \n\n### **Phase 4 – Advanced Personalization**  \n- Continuous learning from user preferences and activity.  \n- Support **multi-turn instructions** (refining the feed iteratively).  \n- Balance personalization with diversity and discovery.  \n\n### **Phase 5 – Scaling & Deployment**  \n- Deploy the application on scalable infrastructure.  \n- Optimize feed generation performance.  \n- Add moderation, safety, and content filtering mechanisms.  \n\n---\n\n##  Progress So Far  \n\n###  Implemented Features  \nA **basic social media application** has been built as the foundation for testing the main feature. Current capabilities:  \n\n-  **User Onboarding & Profiles**  \n  - Registration, login, and profile management.  \n  - **Email verification** for secure onboarding.  \n\n-  **Posts Service**  \n  - Users can create and share posts.  \n  - Support for **media uploads** (images, videos).  \n\n-  **Engagement Features**  \n  - Likes and comments system.  \n  - Interactive content sharing and feedback loop.  \n\nThis foundation is **scaled enough for testing** the upcoming **natural language feed customization feature**.  \n\n---\n\n##  Summary  \n\nThe project has already delivered the **core social media foundation** (onboarding, posts, likes, comments, and media support).  \n\nThe next step is to implement the **main differentiator**:  \n- Users can **type in natural language what kind of feed they want**, and the platform will generate a **customized, dynamic feed** accordingly.  \n"
+  },
+  "ml-1": {
+    "title": "Credit Score Prediction with XAI techniques",
+    "description": "Credit Score Prediction with XAI — Built a high-accuracy credit score regressor from 304 numeric features using rigorous missing-data analysis (MCAR/MAR/MNAR), MICE imputation, feature selection (RFE), and strong baselines with LightGBM. To ensure interpretability and compliance, also trained a Neural Monotonic Additive Model (NMAM) with monotonic constraints, and applied Explainable AI (SHAP/TreeSHAP, partials, and local/global attributions) for transparent insights.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/credit-score-prediction-with-XAI-techniques/",
+      "kaggle": "https://www.kaggle.com/code/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 10,
+    "detailedContent": "Objective: Develop a reliable machine learning pipeline to predict continuous credit scores from 304 numeric features while ensuring fairness, interpretability, and compliance with domain rules.\n\nApproach & Techniques:\n\nConducted missing-data diagnostics (MCAR/MAR/MNAR) and applied MICE (Iterative Imputer) to handle large-scale missingness robustly.\n\nBuilt a LightGBM baseline model, tuned for accuracy and regularization, and applied Recursive Feature Elimination (RFE) for feature selection.\n\nDesigned a Neural Monotonic Additive Model (NMAM) to enforce monotonic relationships on key drivers (e.g., higher income should not lower scores).\n\nApplied Explainable AI (XAI) methods including SHAP / TreeSHAP, global feature importance, and local instance explanations to ensure transparent decision-making.\n\nResults:\n\nLightGBM achieved MAE ≈ 17 and R² ≈ 0.96 on a 20k hold-out validation set, setting a strong performance benchmark.\n\nNMAM underperformed slightly in raw metrics but demonstrated valuable monotonic interpretability for policy and compliance contexts.\n\nLearnings:\n\nTree-based ensembles (LightGBM) remain highly effective for numeric tabular data when combined with rigorous imputation.\n\nMonotonic neural models are powerful for regulatory transparency, even if accuracy trade-offs exist.\n\nXAI techniques (SHAP, monotone partials) are crucial not only for interpretability but also for building stakeholder trust in high-stakes domains like credit scoring.\n\nKaggle Notebook links here:\n\nhttps://www.kaggle.com/code/charansv/credit-score"
+  },
+  "ml-2": {
+    "title": "Indian Real Estate Price Pipeline",
+    "description": "Goal. Build a fully reproducible pipeline that scrapes listings from popular Indian real-estate portals, constructs a clean, analysis-ready dataset, performs exploratory analysis and outlier handling, and trains models to power a price (monthly rent) estimator.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/Bangalore-real-estate",
+      "kaggle": "https://www.kaggle.com/code/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 9,
+    "detailedContent": "Objective: Build a fully reproducible pipeline that scrapes Indian real-estate listings, cleans and structures the data, analyzes pricing patterns, and trains machine learning models to power a rent calculator tool.\n\nApproach & Techniques:\n\nData Collection: Automated property listing extraction with Selenium, handling infinite scroll and dynamic content.\n\nData Processing: Built structured datasets (.csv/.json), standardized categorical/numeric fields, and applied EDA with outlier trimming.\n\nModeling: Trained regression models including Random Forest, Gradient Boosting, and a Keras Neural Network using features like location, size, furnishing status, and building age.\n\nPipeline Design: Implemented an sklearn preprocessing + modeling pipeline with imputation, one-hot encoding, and a reusable predict_rent() function (rent calculator).\n\nResults:\n\nSuccessfully created a city-wide rental dataset for Bangalore.\n\nDelivered a working rent prediction tool that estimates monthly rents based on property features.\n\nAchieved meaningful baseline performance (MAE in rent prediction; exact metrics to be updated after runs).\n\nLearnings:\n\nHandling dynamic web pages (infinite scroll, JS-rendered data) requires robust scraping strategies with retries, waits, and anti-ban measures.\n\nEDA with quantile-based trimming improves downstream modeling stability in heavy-tailed markets like real estate.\n\nTree ensembles (RF/GBR) work reliably for heterogeneous tabular data, while neural networks need careful scaling and tuning.\n\nA structured, modular pipeline (scraping → cleaning → EDA → modeling) makes the project extensible to new cities and portals.\n\nKaggle Notebooks here :\n\nURL Extraction : \n\nhttps://www.kaggle.com/code/charansv/realtor-url-extraction\n\nDataset creation : \n\nhttps://www.kaggle.com/code/charansv/realtor-dataset-creation\n\nData analysis: \n\nhttps://www.kaggle.com/code/charansv/realtor-data-analysis\n\nRent calculator: \n\nhttps://www.kaggle.com/code/charansv/realtor-tool"
+  },
+  "ml-3": {
+    "title": "CIBMTR - Survival Analysis",
+    "description": "My solution to CIBMTR Kaggle competition. The goal was to Rank patients by post-HCT event-free survival (EFS) risk, where events include EFS-defined adverse outcomes; censoring indicates incomplete follow-up. The competition’s leaderboard rewarded good ranking of risk and equitable performance across subgroups, hence we use a monotonic risk score with careful handling of censored data. :contentReference[oaicite:1]{index=1}.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/CIBMTR-survival-analysis/",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 7,
+    "detailedContent": "# CIBMTR Survival Analysis — Theory-Backed Kaggle Submission (v1)\n\n**Notebook:** `cibmtr version 1.ipynb`  \n**Competition:** *CIBMTR — Equity in Post-HCT Survival Predictions*\n\n---\n\n## 1. Problem\n\nThe competition asked participants to **rank patients by post-HCT event-free survival (EFS) risk**, where:\n\n- **Events** = defined adverse outcomes.  \n- **Censoring** = incomplete follow-up.  \n\n**Constraints:**\n\n1. Leaderboard scoring was based on **concordance index (C-index)** — a ranking objective.  \n2. **Equity** was emphasized — models had to perform fairly across demographic subgroups.  \n3. Predictions had to output a **monotone risk score** (ranking preserved under monotone transformations).  \n\n---\n\n## 2. My Solution\n\nI built a **theory-driven pipeline** that integrates survival analysis fundamentals with practical machine learning.\n\n**System Workflow:**\n\n1. **Data audit & preprocessing**  \n   - Inspected missingness and distributions.  \n   - Dropped constants/near-constants.  \n\n2. **Imputation with PMM (MICE)**  \n   - Used Iterative Imputer with Predictive Mean Matching (stochastic donor-based fills).  \n   - Preserved variance and categorical coherence.  \n\n3. **Target engineering (Nelson–Aalen cumulative hazard)**  \n   - Computed non-parametric cumulative hazard estimates \\(\\tilde H(t)\\).  \n   - Used negative cumulative hazard (-\\(\\tilde H(t)\\)) as regression target.  \n   - Added small offset for censored rows to improve separability.  \n\n4. **Modeling (LightGBM Regressor)**  \n   - Mixed categorical + numeric features.  \n   - Trained on (-\\(\\tilde H(t)\\)) with RMSE objective.  \n   - Leveraged monotonicity: outputs are valid risk scores for C-index.  \n\n5. **Submission**  \n   - Produced `submission.csv` with ID + prediction.  \n\n---\n\n## 3. Techniques & Approaches\n\n- **Nelson–Aalen labels** — non-parametric, assumption-light, censoring-aware.  \n- **Margin-based censoring adjustment** — separated censored vs. event cases at equal times.  \n- **PMM imputation (MICE)** — preserved distributional fidelity.  \n- **Gradient boosting (LightGBM)** — efficient, interpretable, strong on tabular mixed-type data.  \n- **Equity awareness** — monotone risk formulation compatible with subgroup fairness evaluation.  \n\n---\n\n## 4. Skills Demonstrated\n\n- **Survival analysis theory** — hazard, cumulative hazard, censoring, concordance.  \n- **Applied ML for healthcare data** — handling censored outcomes and subgroup fairness.  \n- **Feature engineering & imputation** — robust PMM over simple mean/median.  \n- **Modeling tabular data** — LightGBM with categorical handling.  \n- **Competition strategy** — aligning targets to leaderboard metric.  \n\n---\n\n## 5. Technologies Used\n\n- **Python 3.11**  \n- **pandas, numpy** — data prep.  \n- **scikit-learn (Iterative Imputer)** — PMM/MICE imputation.  \n- **lifelines (Nelson–Aalen)** — survival estimation.  \n- **LightGBM** — modeling.  \n\n---\n\n## 6. Impact\n\nThis pipeline provided a **clean, theory-backed baseline** that ranked patients fairly and robustly. It emphasized **interpretability and survival-theory alignment**, while still leveraging modern ML for strong leaderboard performance.\n\n---\n\n# CIBMTR Survival Analysis — Multi-Approach Ensemble (v2)\n\n**Notebook:** `cibmtr version 2.ipynb`  \n**Competition:** *CIBMTR — Equity in Post-HCT Survival Predictions*\n\n  **Important Note:** This notebook **builds upon another Kaggle user’s shared approach**, but I made **several important modifications** to adapt and improve it for my workflow. Unlike v1 (entirely my own design), this solution is partly borrowed but meaningfully extended.\n\n---\n\n## 1. Problem\n\nSame competition context as v1:\n\n1. Rank patients by risk using **C-index**.  \n2. Maintain **equitable performance** across subgroups.  \n3. Blend **multiple signals** for robustness.  \n\n---\n\n## 2. My Solution\n\nThis version explored **three complementary pipelines** and blended them via **rank-based ensembling** to improve performance.\n\n**System Workflow:**\n\n### Approach A — My Implementation (PRL-NN with censoring-aware ranking)\n- Designed and implemented an **event-masked Pairwise Ranking Neural Network (PRL-NN)**.  \n- **Features:**  \n  - Pairwise hinge loss with censoring-aware masks.  \n  - Auxiliary time-prediction head (for event-only rows).  \n  - Race-wise variance penalty to improve subgroup fairness.  \n  - Event-probability classifier mask (XGBoost) to sharpen predictions.  \n- **Outputs:** `submission2.csv`.  \n\n### Approach B — Adapted from another Kaggle user (modified Yunbase-style ensemble)\n- Started from a shared pipeline, but made **key changes and refinements**:  \n  - Adjusted feature handling and time transforms.  \n  - Modified subgroup KM-based targets.  \n  - Tweaked weighting scheme for subgroup balance.  \n- **Models:** LightGBM + CatBoost blend.  \n- **Outputs:** `submission1.csv`.  \n\n### Approach C — Multi-target survival ensemble (my extension)\n- Combined **four survival signals**:  \n  1. Cox partial hazard.  \n  2. Kaplan–Meier survival \\(S(t)\\).  \n  3. Nelson–Aalen cumulative hazard (-\\(\\tilde H(t)\\)).  \n  4. Signed time (+t for events, -t for censored).  \n- Trained multiple **CatBoost** and **LightGBM** regressors per target.  \n- **Outputs:** `submission3.csv`.  \n\n### Final Rank Ensemble\n- Converted all model predictions to **ranks**.  \n- Blended them with tuned weights to get **final `submission.csv`**.  \n\n---\n\n## 3. Techniques & Approaches\n\n- **Pairwise ranking neural network** — directly optimized for C-index.  \n- **Subgroup-aware targets & fairness penalties** — ensured equity.  \n- **Multi-target survival learning** — captured complementary risk signals.  \n- **Rank-based ensembling** — robust to calibration mismatches, aligned with leaderboard metric.  \n- **Code adaptation & modification** — carefully adapted another user’s shared code to fit my improved workflow.  \n\n---\n\n## 4. Skills Demonstrated\n\n- **Neural survival modeling** — designing pairwise ranking loss functions.  \n- **Fairness-aware ML** — subgroup penalty integration.  \n- **Ensembling** — blending heterogeneous models into robust final predictions.  \n- **Code adaptation & extension** — responsibly reusing shared Kaggle solutions with meaningful modifications.  \n- **Competition strategy** — building multiple diverse pipelines and ensembling for leaderboard gain.  \n\n---\n\n## 5. Technologies Used\n\n- **Python 3.11**  \n- **pandas, numpy**  \n- **PyTorch Lightning** — neural net implementation.  \n- **XGBoost** — event-probability classifier.  \n- **LightGBM, CatBoost** — gradient boosting models.  \n- **lifelines** — CoxPH, Kaplan–Meier, Nelson–Aalen targets.  \n\n---\n\n## 6. Impact\n\nCompared to v1, this **ensemble approach** achieved **stronger leaderboard results** by:\n\n1. Directly optimizing C-index (via PRL-NN).  \n2. Leveraging **multiple survival signals** instead of a single target.  \n3. Integrating **fairness explicitly** through penalties and subgroup-aware targets.  \n\nIt demonstrates my ability to:  \n- **Design original models** (Approach A, C).  \n- **Adapt and meaningfully improve community-shared approaches** (Approach B).  \n- **Strategically ensemble models** for practical performance gains.  \n"
+  },
+  "ml-4": {
+    "title": "ClusterGAN for Regime Discovery on Indian Stocks (NSE)",
+    "description": "I adapted ClusterGAN to unlabeled NSE stock data to discover market regimes directly from high-dimensional features (OHLCV, indicators, sentiment, macro, global indices, FX/commodities). I trained G/D/E with WGAN-GP and latent consistency, swept latent std & clipping, explored cluster counts K ∈ [2, 100], and compared against K-Means.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/stock-market/tree/main/ClusterGAN%20Implementation%20on%20Stocks",
+      "kaggle": "https://www.kaggle.com/code/charansv/stock-cluster-gan-1",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 3,
+    "detailedContent": "# ClusterGAN for Regime Discovery on Indian Stocks (NSE)  \n\n##  Objective  \nThe objective of this project was to **adapt the ClusterGAN paper** for unlabeled **NSE stock data** and test whether it can **discover latent market regimes** directly from high-dimensional features.  \nSpecifically, I wanted to see:  \n- Whether ClusterGAN could uncover **interpretable regimes** aligned with technical/macro/sentiment signals.  \n- Whether it would also reveal **latent “mysterious” regimes** driven by exogenous shocks not captured in features — useful for risk detection and alerts.  \n\n---\n\n##  Project Overview  \nMost published ClusterGAN applications focus on “nice” labeled benchmarks like MNIST. In contrast, **financial markets are unlabeled, non-stationary, fat-tailed, and regime-shifting**.  \n\nThis project used a **large consolidated NSE dataset (~518,000 rows × 92 features)** engineered by me, including:  \n- **Core OHLCV & technical indicators** (RSI, MACD, Bollinger Bands, ATR, SMA/EMA/WMA, etc.).  \n- **Momentum & volatility features** (rolling std, Sharpe ratio, ROC, Z-scores, kurtosis/skewness).  \n- **Lagged & rolling features** (returns, prices, volumes).  \n- **Sentiment signals** (news sentiment, lagged scores, weighted sentiment metric).  \n- **Market/global indices** (Nifty50, SP500, FTSE100, DAX, Nikkei225).  \n- **Macro & risk proxies** (USD/INR, crude oil, gold, VIX).  \n\nThe goal was to run **ClusterGAN sweeps across K=2–100**, test stability knobs (noise std σ, latent clipping), and benchmark against **K-Means clustering**.  \n\n---\n\n##  The Problem  \n- Traditional clustering (K-Means, hierarchical) struggles on **non-stationary, fat-tailed financial data**.  \n- Market regimes are often **partially explainable**: some linked to volatility/technical states, others driven by **news or macro shocks**.  \n- Needed a method that could capture **both interpretable and latent structures**.  \n\n---\n\n##  The Solution  \n- Implemented **ClusterGAN with WGAN-GP + latent consistency** (MSE for continuous z_n, CE for discrete z_c).  \n- Used **MLPs** for G/D/E for tabular stability.  \n- Preprocessed with **MinMax scaling [−1,1]**, company-aware splits, and NaN/inf handling.  \n- Swept over:  \n  - **Cluster counts (K)** → {3, 7, 100}.  \n  - **Noise std (σ)** → 0.05–0.25.  \n  - **Clipping ranges** → [−0.6, 0.6], [−0.7, 0.7], [−0.8, 0.8].  \n- Benchmarked against **K-Means** with same K.  \n- Added **post-hoc explainability check** (Random Forest / LightGBM predicting cluster IDs) to distinguish explainable vs latent regimes.  \n\n---\n\n##  Techniques & Approaches  \n- **GAN architecture**: Generator, Discriminator, Encoder with WGAN-GP loss.  \n- **Latent design**: mixed code z = [z_n (Gaussian), z_c (one-hot cluster ID)].  \n- **Training**:  \n  - Adam optimizer (5e-5, betas=0.5,0.9).  \n  - Batch size up to 10k.  \n  - Sweeps with short runs (8 epochs).  \n- **Evaluation metrics**: Silhouette, Calinski–Harabasz, Davies–Bouldin, Compactness, Inertia.  \n- **Explainability check**: trained classifiers to see if clusters were predictable from features.  \n\n---\n\n##  Key Results  \n- **K=7 run**:  \n  - **4 clusters** were highly explainable from features (clear technical/momentum/volatility regimes).  \n  - **3 clusters (~10% of data)** were “mysterious/volatile” — not explainable by current features, but systematically formed → likely exogenous shocks (macro/news).  \n- **Best stability knobs**:  \n  - Noise std σ ≈ **0.10–0.15**.  \n  - Clipping ≈ **[−0.6, 0.6]**.  \n- **Representative metrics (K=7, one run)**:  \n  - Silhouette ≈ 0.00 (sampled 45k points).  \n  - CH ≈ 34,680.8.  \n  - DB ≈ 2.95.  \n  - Inertia ≈ 2.8M.  \n- **Extreme K tests**:  \n  - K=3 → coarse but interpretable regimes.  \n  - K=100 → fragmented; required longer training/regularization.  \n\n **Conclusion**: ClusterGAN discovered both interpretable market regimes and latent “volatile” clusters likely tied to **exogenous drivers** missing in current features.  \n\n---\n\n##  My Contributions & Skills Demonstrated  \n- Adapted **ClusterGAN** to large-scale, high-dimensional financial tabular data.  \n- Engineered **92 features** across technical, macro, sentiment, and volatility dimensions.  \n- Designed **systematic sweeps** over cluster counts, noise, and clipping.  \n- Implemented **robust preprocessing pipeline** (NaN/inf handling, scaling, company-aware splits).  \n- Conducted **explainability diagnostics** (tree classifiers on clusters).  \n- Interpreted results in terms of **market regimes and exogenous shocks**.  \n\n---\n\n## ⚙️ Technologies Used  \n- **Python** (NumPy, Pandas, Scikit-learn, Polars)  \n- **PyTorch** (GAN implementation: G/D/E)  \n- **GAN framework**: WGAN-GP + latent consistency  \n- **LightGBM / Random Forest** for explainability checks  \n- **Visualization**: Matplotlib, Seaborn  \n- **Data sources**: NSE, Yahoo Finance, sentiment pipelines, macro/commodity/FX series  \n\n---\n\n##  Future Work  \n- **Strengthen z_n** → richer intra-cluster variations by adjusting loss weights.  \n- **Full K sweep (2–100)** with multiple seeds + temporal robustness.  \n- **Add more exogenous signals** → earnings events, macro calendars, sectoral indices.  \n- **Company embeddings** → capture cross-asset similarities while retaining idiosyncrasies.  \n- **Downstream usage**:  \n  - Regime-aware forecasting with LightGBM/Transformers using cluster ID.  \n  - Risk alerts when samples map to low-density latent regions.  \n- **Longer training & deeper nets** → improve separation and stability.  \n\n---\n\n##  Impact  \nThis project shows that **ClusterGAN can uncover latent regimes in Indian stock markets**, including both interpretable clusters (technical/momentum/volatility regimes) and **hidden “volatile” states** not explained by standard features.  \nSuch latent regimes are valuable for **risk management, regime-aware forecasting, and alerting systems**, and highlight the need for integrating **macro & event-driven features** in future pipelines.  \n\nNotebook:\nhttps://www.kaggle.com/code/charansv/stock-cluster-gan-1"
+  },
+  "ml-5": {
+    "title": "Multi-Horizon Stock Forecasting",
+    "description": "I created a large-scale stock market dataset covering almost all NSE-listed companies with daily data and over 80 engineered features spanning technical indicators, sentiment, macroeconomic, and global signals. Using this dataset, I built predictive models (LightGBM, early Transformer prototypes) and multi-horizon forecasts, while also simulating trades with realistic backtesting. The project provides a robust foundation for future hybrid ensemble models, portfolio optimization, and reinforcement learning–based trading strategies.\n",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/stock-market/",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 4,
+    "detailedContent": "# NSE Stock Dataset Creation, Predictive Modeling & Trade Simulation  \n\n##  Objective  \nThe objective of this project was to **create an extensive real-world stock market dataset** covering almost all **NSE-listed companies (daily data)**, engineer **80+ rich features** spanning technical, macroeconomic, sentiment, and statistical signals, and then use this dataset for downstream experiments such as **predictive modeling** and **trade simulation**.  \n\nThe project also set out to **test a hybrid ensemble approach** combining **LightGBM (tabular patterns)** and **Transformers (temporal patterns)**. While resource limitations prevented full deployment of this ensemble at scale, it remains part of the **future pipeline**.  \n\n---\n\n##  Project Overview  \nThe workflow was divided into **three main components**:  \n\n1. **Dataset Creation & Feature Engineering**  \n   - Extracted historical daily stock data for almost all NSE companies (and BSE tickers for completeness).  \n   - Engineered **80+ features** across categories:  \n     - **Technical indicators** (RSI, MACD, Bollinger Bands, ATR, etc.)  \n     - **Volatility & momentum features** (rolling std, rate of change, momentum, acceleration).  \n     - **Lagged & rolling features** (lagged prices/volumes, rolling returns, rolling Sharpe ratios).  \n     - **Pattern features** (candlesticks, Fibonacci retracements, pivot points).  \n     - **Market & global indicators** (Nifty50, SP500, FTSE100, Nikkei225, DAX, INR/USD, crude oil, gold, VIX).  \n     - **Macroeconomic signals** (exchange rates, inflation proxies, commodity levels).  \n     - **Sentiment features**:  \n       - Collected daily financial news from **Reuters, Bloomberg, Economic Times, WSJ, GDELT**.  \n       - Scored with **VADER sentiment analysis**.  \n       - Created **lagged sentiment features (1, 5, 10 days)**.  \n       - Learned a **Weighted Sentiment Metric** via regression coefficients.  \n\n2. **Predictive Modeling**  \n   - Tested **LightGBM** for tabular feature-based forecasting.  \n   - Prototyped **Transformer-based models** to capture temporal dependencies.  \n   - Designed an **ensemble (LightGBM + Transformer)** pipeline to combine feature-wise and temporal patterns (future implementation).  \n   - Forecasting tasks:  \n     - **Single-step predictions** (next-day returns/movements).  \n     - **Multi-horizon forecasting** (10-day ahead prices with LightGBM).  \n\n3. **Trade Simulation**  \n   - Built a **backtesting environment** with:  \n     - Transaction costs & slippage.  \n     - Stop-loss/take-profit mechanisms.  \n     - Position sizing rules.  \n   - Evaluated strategies using **PnL, Sharpe ratio, max drawdown, and win/loss rates**.  \n\n---\n\n##  The Problem  \n- Public stock datasets are usually raw (just OHLCV) and lack engineered signals.  \n- No unified dataset combining **technical, sentiment, macro, and market-wide features** existed for NSE companies.  \n- Predictive models often fail in real-world backtesting without **macro and sentiment conditioning**.  \n- Ensemble approaches combining **tabular ML (trees)** and **sequence models (Transformers)** are underexplored in finance.  \n\n---\n\n##  The Solution  \n- **Built a feature-rich dataset** (~80+ engineered features × hundreds of NSE companies × multi-year coverage).  \n- Integrated **macro + global indicators** and **daily news sentiment pipelines** into company-level stock data.  \n- Trained and compared:  \n  - **LightGBM** → strong baseline for feature-driven tabular patterns.  \n  - **Transformers** → sequence modeling of temporal dependencies.  \n  - **LightGBM + Transformer ensemble (planned)** → hybrid approach balancing feature-wise and temporal insights.  \n- Simulated **trading strategies** to validate predictive models against realistic market conditions.  \n\n---\n\n##  Techniques & Approaches  \n- **Data ingestion**: Ticker extraction, Yahoo Finance API, BhavCopy parsing for NSE/BSE.  \n- **Feature engineering**: 80+ features across technical, sentiment, macro, volatility, and rolling statistics.  \n- **Sentiment analysis**: VADER, lagged features, Weighted Sentiment Metric.  \n- **Modeling**: LightGBM, Transformers, planned ensemble pipeline.  \n- **Forecasting**: single-step + 10-day multi-horizon with LightGBM.  \n- **Backtesting**: custom trade simulation with realistic costs.  \n- **Evaluation**:  \n  - Predictive → RMSE, MAPE, Accuracy, AUC.  \n  - Trading → Sharpe ratio, drawdowns, PnL.  \n\n---\n\n##  Key Results  \n- **Dataset**: Daily data for almost all NSE companies with **80+ engineered features**.  \n- **Multi-horizon forecasting (LightGBM)**:  \n  - 1-day MAPE ≈ **5.9%**, increasing to ~**17%** by day 10.  \n  - Short-horizon forecasts generalize well; errors grow with horizon length (expected in finance).  \n- **LightGBM vs Transformer**:  \n  - LightGBM delivered strong results on feature-driven tasks.  \n  - Early Transformer experiments were limited (row-wise modeling only), highlighting the need for true sequence windowing.  \n- **Trade simulation**:  \n  - Feature-informed strategies outperformed naïve baselines.  \n  - Profitability was sensitive to transaction costs and macro volatility regimes.  \n\n **Conclusion**: The dataset proved effective for both modeling and simulation. LightGBM excelled on tabular patterns, while Transformer potential remains for future sequence-based modeling.  \n\n---\n\n## My Contributions & Skills Demonstrated  \n- Built a **large-scale financial dataset** covering almost the full NSE universe.  \n- Engineered **80+ diverse features** (technical, macro, sentiment, volatility, rolling).  \n- Designed a **sentiment pipeline** using financial news + VADER + lagged/weighted metrics.  \n- Implemented **multi-model predictive experiments** (LightGBM, Transformer, hybrid pipeline design).  \n- Developed a **trade simulation framework** with realistic execution constraints.  \n- Balanced **data engineering, financial domain knowledge, and ML expertise**.  \n\n---\n\n##  Technologies Used  \n- **Python** (Pandas, NumPy, Scikit-learn, Polars)  \n- **TA-Lib & custom scripts** for technical indicators  \n- **LightGBM, XGBoost, PyTorch Transformers** for modeling  \n- **Optuna** for hyperparameter tuning  \n- **Backtesting**: custom Python simulation environment  \n- **Sentiment**: VADER, RSS feeds, GDELT integration  \n- **Macro & global data sources**: Yahoo Finance, RBI, IMF, FRED APIs  \n- **Visualization**: Matplotlib, Seaborn, Plotly  \n\n---\n\n##  Future Work  \n- **Full Transformer pipeline** with sliding windows, positional encodings, and company embeddings.  \n- **Hybrid ensemble** (LightGBM + Transformer) for combined feature + temporal learning.  \n- **Portfolio-level optimization** (multi-asset strategies, risk parity, sector exposure).  \n- **Advanced sentiment** (deep NLP embeddings, context-aware news signals).  \n- **Integration of additional macroeconomic series** (bond yields, inflation indices, sectoral indices).  \n- **Reinforcement learning** for adaptive trading strategies.  \n\n---\n\n##  Impact  \nThis project establishes a **real-world-scale financial dataset** with 80+ engineered features across **NSE-listed companies**, enabling predictive modeling, forecasting, and simulation research. It bridges the gap between raw market data and feature-rich, experiment-ready datasets, and lays the groundwork for advanced ML pipelines (ensembles, RL agents, portfolio strategies).  \n\nKaggle Notebooks :\n\nEquity Data extraction :\nhttps://www.kaggle.com/code/charansv/equity-data-extraction\n\nSentiment scores extraction :\nhttps://www.kaggle.com/code/charansv/stock-sentiment-scores\n\nDataset Creation main (All other features) :\nhttps://www.kaggle.com/code/charansv/stock-dataset-creation\n\nPreliminary training (all approaches tested):\nhttps://www.kaggle.com/code/charansv/stock-preliminary-training\n\nModel training: \nhttps://www.kaggle.com/code/charansv/stock-market-code\n"
+  },
+  "ml-6": {
+    "title": "Synthetic Data Augmentation using CTGAN",
+    "description": "This repository documents an extensive set of experiments to generate synthetic data for a benchmark dataset (Telco Customer Churn dataset) using CTGAN.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/Data-augmentation-using-CTGAN",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 8,
+    "detailedContent": "# Synthetic Data Augmentation with CTGAN – Experiments, Results & Diagnosis  \n\n##  Objective  \nThe purpose of this project was to **implement the CTGAN paper** on the **Telco Customer Churn dataset** to test its ability for **data augmentation** and evaluate whether the generated synthetic samples preserved the statistical and structural properties of the original data.  \n\n---\n\n##  Project Overview  \nGANs for tabular data, particularly **CTGAN (Conditional Tabular GAN)**, are often proposed as strong methods for synthetic data generation. To validate this, I implemented CTGAN on the churn dataset and conducted a **comprehensive evaluation** of the generated data, with special attention to numeric features (`MonthlyCharges`, `TotalCharges`, and `tenure`).  \n\nDespite extensive tuning and experimentation, the results showed that **CTGAN fails to faithfully reproduce numeric distributions and their relationships**, revealing important limitations of the model in real-world tabular contexts.  \n\n---\n\n##  The Problem  \n- The churn dataset mixes **categorical and continuous features**, with charges and tenure exhibiting strong structural patterns.  \n- **MonthlyCharges** is *hyper-multimodal* (hundreds of underlying modes from tariffs and add-ons).  \n- **TotalCharges** is **formula-driven** (`≈ tenure × MonthlyCharges`), which CTGAN cannot enforce.  \n- CTGAN’s internal Gaussian mixture normalization is not suited for this level of multimodality.  \n\n---\n\n##  Experiments & Solution Attempts  \nI tested CTGAN under a wide variety of configurations and preprocessing strategies:  \n\n1. **Baseline CTGAN + Optuna tuning** → varied epochs, embedding dims, architectures, learning rates.  \n2. **Discriminator tests (LightGBM)** → consistently achieved very high accuracy (sometimes 1.0) in distinguishing real vs synthetic rows.  \n3. **Distribution diagnostics** → KS and Wasserstein tests revealed large numeric deviations.  \n4. **Gaussian Mixture Models (GMM)** → revealed extreme multimodality (e.g., `MonthlyCharges` ≈ 998 modes).  \n5. **Transformations (log, Box-Cox, Yeo-Johnson, QuantileTransformer)** → normalized marginals but failed to restore conditional/joint fidelity.  \n6. **Segmentation strategies** → per-tenure CTGANs (72 splits) and binning, which fragmented data and remained unrealistic.  \n7. **Utility tests (TSTR/TSFR)** → mixed results (AUC ≈ 0.817).  \n8. **Scaling & post-processing** → rounding/clipping improved realism superficially but didn’t resolve structural flaws.  \n\n---\n\n##  Key Results  \n- **QualityReport (best run)**: Shapes 95.78%, Pair Trends 92.71%.  \n- **Discriminator test**: Accuracy = 1.0 (perfect separation); another run = 0.91, ROC AUC = 0.78.  \n- **KS/Wasserstein**: Large deviations for numeric features.  \n- **Utility (TSTR/TSFR)**: AUC ≈ 0.817, Acc ≈ 0.77.  \n\n **Conclusion**: CTGAN could not faithfully model numeric variables like `MonthlyCharges` and `TotalCharges`. Discriminator models repeatedly proved that synthetic samples were distinguishable from real ones.  \n\n---\n\n##  Diagnosis  \n- **MonthlyCharges is hyper-multimodal** → CTGAN not designed for thousands of modes.  \n- **TotalCharges is formula-driven** → arithmetic relationships lost in synthetic data.  \n- **Conditional heterogeneity** (contract, add-ons) was blurred.  \n- **Marginal transformations** were inadequate to fix joint/conditional failures.  \n\n---\n\n##  My Contributions & Skills Demonstrated  \n- Implemented the **CTGAN paper** end-to-end for synthetic augmentation.  \n- Designed a **multi-layer evaluation pipeline** (statistical tests, discriminators, utility checks).  \n- Applied **advanced diagnostics** (GMM, KS/Wasserstein, skewness, kurtosis).  \n- Identified and explained **failure modes** of CTGAN on numeric-heavy features.  \n- Proposed **future directions with alternative models**.  \n\n---\n\n##  Technologies Used  \n- **Python** (NumPy, Pandas, Scikit-learn, Optuna)  \n- **SDV / CTGAN library**  \n- **LightGBM** (discriminator, utility models)  \n- **Statistical tools**: KS tests, Wasserstein, GMM, skewness/kurtosis  \n- **Visualization**: Matplotlib, Seaborn  \n- **Experiment reproducibility**: Jupyter notebooks with structured experiments  \n\n---\n\n##  Future Work – Alternatives to CTGAN  \nGiven the repeated failures of CTGAN on numeric fidelity, the next phase is to evaluate alternative generative models:  \n- **GaussianCopula** → strong on continuous marginals & dependencies.  \n- **TVAE (Tabular VAE)** → better suited for continuous variables than GANs.  \n- **Diffusion models for tabular data** → naturally capture multimodality.  \n- **Hybrid pipelines** → categorical features with GAN, numeric with copula/diffusion.  \n\n---\n\n##  Impact  \nThis project demonstrates that **implementing CTGAN directly on churn data is insufficient for realistic numeric modeling**, despite promising quality metrics. It provides a **diagnostic framework** for synthetic data evaluation and highlights the importance of exploring **alternative generative approaches** for numeric-heavy datasets.  \n\nKaggle Notebooks :\n\nNotebook 1 : \nhttps://www.kaggle.com/code/charansv/customer-churn-data-augmentation\n\nNotebook 2 : \nhttps://www.kaggle.com/code/charansv/churn-data-augmentation-baseline-minimal-tests"
+  },
+  "ml-7": {
+    "title": "Conventional + Custom GNN based auto encoders for fraud detection",
+    "description": "Testing both conventional supervised learning techniques and unsupervised custom GNN-based autoencoders for credit-card fraud detection.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/credit-fraud",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 5,
+    "detailedContent": "# Credit Card Fraud Detection with Supervised Models & Custom GNN Autoencoders  \n\n##  Objective  \nThe goal of this project was to **compare conventional supervised learning techniques with unsupervised custom GNN-based autoencoders** for **credit-card fraud detection**.  \n\nFraud datasets are **extremely imbalanced and noisy**. While supervised methods like **LightGBM** are strong baselines, the project explored whether **graph-based autoencoders** could learn geometry-aware embeddings from tabular data and naturally separate fraud from non-fraud transactions without labels.  \n\n---\n\n##  Project Overview  \nCredit card fraud is a high-stakes application where missed detections cost businesses significantly, but false positives hurt customer trust. Traditional supervised methods achieve excellent accuracy but may not generalize under extreme imbalance.  \n\nIn this project, I:  \n- Trained **Decision Trees and LightGBM** (with imbalance handling) as supervised baselines.  \n- Built **KNN graphs** from transaction features and trained **custom GAT/GCN-based autoencoders**.  \n- Clustered embeddings using **HDBSCAN and KMeans** to evaluate whether fraud forms distinct communities.  \n\nThe project demonstrates that **ClusterGCN autoencoders + HDBSCAN** yield near-binary separation of fraud vs non-fraud clusters, while **GAT autoencoders** highlight fraud-heavy micro-clusters.  \n\n---\n\n##  The Problem  \n- Fraud datasets have **fraud rate ≈ 0.17%** → extreme class imbalance.  \n- Supervised classifiers perform well, but require **resampling, threshold tuning, and cost-sensitive adjustments**.  \n- Most fraud detection work on tabular data doesn’t leverage **graph structure**.  \n- Key question: *Can GNN-based autoencoders uncover fraud communities in an unsupervised way?*  \n\n---\n\n##  The Solution  \nTwo independent experimental tracks were explored:  \n\n1. **Supervised Track**  \n   - Decision Tree (with and without oversampling).  \n   - LightGBM (with SMOTE, `scale_pos_weight`, and threshold tuning).  \n   - Evaluation with Precision, Recall, F1, and AUC focused on the fraud class.  \n\n2. **Unsupervised Track (Custom GNN Autoencoders)**  \n   - Construct KNN graphs (k = 5, 10) from standardized tabular features.  \n   - Train GNN autoencoders:  \n     - **GCN / ClusterGCN AE** → Laplacian smoothing, scalable mini-batching.  \n     - **GAT AE** → Attention-based aggregation, capturing heterogeneous neighborhoods.  \n   - Extract embeddings and cluster with **HDBSCAN** and **KMeans**.  \n   - Assess cluster purity and fraud concentration.  \n\n---\n\n##  Techniques & Approaches  \n- **Data preprocessing**: standardization, oversampling (SMOTE), careful train/test split (80/20).  \n- **Supervised models**: handled imbalance with oversampling + class weights.  \n- **Graph construction**: built KNN similarity graphs, optionally weighted with cosine similarity.  \n- **Autoencoder training**: minimized reconstruction loss (MSE/MAE).  \n- **Clustering**: compared HDBSCAN (density-based) with KMeans (k=2).  \n- **Evaluation**: emphasized Recall, F1, AUC for fraud (minority) detection.  \n\n---\n\n##  Key Results  \n\n### Supervised Track  \n| Model | Accuracy | Precision (fraud) | Recall (fraud) | F1 | AUC |  \n|-------|----------|--------------------|----------------|----|-----|  \n| Decision Tree | 99.90% | 66.7% | 71.1% | 68.8% | — |  \n| Decision Tree + Oversampling | 99.92% | 81.3% | 68.4% | 74.3% | — |  \n| LightGBM (SMOTE + pos_weight) | 99.99% | 0.989 | 0.926 | 0.957 | 0.997 |  \n\n **Observation**: LightGBM dominates in the supervised setting, but requires careful **threshold tuning** (PR curve / cost-sensitive Fβ).  \n\n---\n\n### Unsupervised Track (GNN Autoencoders + Clustering)  \n- **GAT AE + HDBSCAN** → Multiple micro-clusters, one with **51 fraud / 9 non-fraud** (strong fraud concentration).  \n- **GCN / ClusterGCN AE + HDBSCAN** → Two large clusters with clear separation:  \n  - Cluster A: ~56k non-fraud / 25 fraud (~99.96% non-fraud).  \n  - Cluster B: 49 fraud / 8 non-fraud (~86% fraud).  \n- **KMeans** → Less aligned than HDBSCAN (fraud diluted across clusters).  \n\n **Observation**: ClusterGCN + HDBSCAN provided a **clean near-binary fraud vs non-fraud split**, while GAT was better for **fine-grained fraud-heavy micro-clusters**.  \n\n---\n\n## 🔑 Why This Matters  \n- Demonstrates that **GNN autoencoders can learn unsupervised fraud representations** directly from tabular data converted into graphs.  \n- Shows **GCN vs GAT differences**:  \n  - GCN excels at global separation under homophily.  \n  - GAT uncovers nuanced local fraud patterns.  \n- Provides a **dual-track framework**: supervised models for production-ready baselines, unsupervised embeddings for exploratory fraud analysis.  \n\n---\n\n##  My Contributions & Skills Demonstrated  \n- Designed and implemented **custom GNN-based autoencoders** for tabular fraud data.  \n- Built an **end-to-end dual-track pipeline** (supervised + unsupervised).  \n- Applied **graph construction and representation learning** to a non-graph domain.  \n- Benchmarked models with **imbalance-aware evaluation**.  \n- Analyzed and explained **why embeddings reveal fraud structure** (homophily, manifold smoothing).  \n\n---\n\n##  Technologies Used  \n- **Python** (NumPy, Pandas, Scikit-learn, Imbalanced-learn)  \n- **LightGBM** (supervised baseline)  \n- **PyTorch / PyTorch Geometric** (custom GAT/GCN autoencoders)  \n- **Clustering**: HDBSCAN, KMeans  \n- **Visualization**: Matplotlib, Seaborn  \n- **Reproducibility**: seed setting, structured experiment notebooks  \n\n---\n\n##  Project Structure (Suggested)  \n- `supervised_models.ipynb` → Decision Tree + LightGBM experiments.  \n- `gnn_autoencoders.ipynb` → Graph construction, GAT/GCN AE training.  \n- `clustering_embeddings.ipynb` → HDBSCAN / KMeans evaluation.  \n\n---\n\n##  Impact  \nThis project shows how **supervised and unsupervised fraud detection pipelines** complement each other:  \n- **Supervised models** (LightGBM) deliver **state-of-the-art predictive performance** with tuning.  \n- **Unsupervised custom GNN autoencoders** reveal **fraud communities** in embeddings, offering interpretable and flexible fraud analysis tools.  \n\n---\n\nNotebook : https://www.kaggle.com/code/charansv/credit-fraud"
+  },
+  "ml-8": {
+    "title": "Testing with Custom Cluster based GNN Architectures",
+    "description": "Goal : Compare multiple clustering techniques on the Telco Churn dataset, understand which K (number of clusters) is appropriate for each method, and then propose & evaluate a custom cluster-aware GNN. We show that adding the right clustering signal improves downstream classification, especially for minority (churn=1) detection.",
+    "category": "ml-data-science",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/custom-cluster-based-GNN-architectures-on-churn-data",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 6,
+    "detailedContent": "# Cluster-Driven Churn Modeling with Custom GNNs  \n\n##  Objective  \nThe primary objective of this project was to **design and evaluate new custom Graph Neural Network (GNN) architectures** and test their effectiveness on a well-known benchmark dataset.  \n\nTo ground the study, I used the **Telco Customer Churn dataset** as a standard real-world test case. The project explored how **clustering techniques** could be incorporated into GNN pipelines as an additional relational prior, and whether this would lead to measurable improvements over vanilla GAT/GCN baselines.  \n\n---\n\n##  Project Overview  \nCustomer churn prediction is a key challenge for subscription-based businesses. Traditional models often fail to capture hidden community structures in customer behavior, especially when dealing with **imbalanced datasets** (few churners vs many non-churners).  \n\nThis project explores **cluster-driven graph learning** to evaluate new GNN architectures on the **Telco Churn dataset (7k+ records)**. The study compares multiple **clustering techniques**, evaluates the right number of clusters (**K**) per method, and proposes a **custom cluster-aware GNN**.  \n\nThe findings show that **adding clustering signals** into graph models improves downstream classification—particularly recall and F1-score for the minority churn class—validating the effectiveness of the custom architecture.  \n\n---\n\n##  The Problem  \n- How to **test the effectiveness of custom GNN architectures** on a standard dataset.  \n- Vanilla GNNs (GAT/GCN) often ignore hidden community signals in mixed-type tabular data.  \n- Customer churn is **imbalanced** and requires better detection of minority classes (churners).  \n- Clustering results may differ by model type (flat vs graph), complicating evaluation.  \n\n---\n\n## 💡 The Solution  \n- Build a **comparative pipeline** across clustering methods:  \n  - **ClusterGAN** (GAN with categorical latent codes)  \n  - **k-Prototypes** (mixed numeric + categorical)  \n  - **Hierarchical clustering** (Gower distance)  \n  - **Latent Class Analysis (LCA)**  \n- Select the optimal number of clusters (**K**) per method using internal & external validity indices.  \n- Incorporate cluster signals into a **custom GNN architecture** through:  \n  - Cluster-aware embeddings.  \n  - Edge reweighting (higher weights for same-cluster edges).  \n- Benchmark performance against vanilla GCN/GAT and flat models like LightGBM.  \n\n---\n\n## 🛠️ Techniques & Approaches  \n- **Data preprocessing**  \n  - Dropped IDs, coerced numeric fields, encoded categorical variables.  \n  - Held out a unique test set before any class balancing.  \n- **Clustering evaluation**  \n  - Internal (Silhouette, CH, DB) and external (NMI, ARI, BIC) criteria.  \n  - Compared coarse vs fine-grained clusterings (K=2 vs K=4 for ClusterGAN).  \n- **Graph learning**  \n  - Constructed k-NN graphs from customer features.  \n  - Designed **custom GNNs** that integrate clustering into message passing.  \n- **Evaluation**  \n  - Used **optimistic precision–recall operating point** for fair comparison.  \n  - Reported Accuracy, Precision, Recall, and F1 for the churn class.  \n\n---\n\n## 📊 Key Results  \n- **Baseline LightGBM**: Acc. 0.73 | Recall (churn) 0.78 | F1 0.61.  \n- **Vanilla GAT/GCN**: Recall improved (0.70–0.77), F1 up to 0.67.  \n- **Custom GNN + clustering**:  \n  - **LCA (K=5)** → Best minority F1 = 0.68, Recall = 0.77.  \n  - **ClusterGAN (K=2)** → Strong geometry, F1 = 0.66, Recall = 0.72.  \n  - **ClusterGAN (K=4)** → Highest accuracy (0.82) but lower minority recall.  \n\n➡️ **Conclusion**:  \n- **Custom GNN architectures** effectively leveraged clustering to outperform vanilla baselines.  \n- Best choice depends on model type:  \n  - **Flat models** → benefit from label-aligned clusters (LCA K=5, ClusterGAN K=4).  \n  - **Graph models** → benefit from compact, geometric clusters (ClusterGAN K=2).  \n\n---\n\n## 🧑‍💻 My Contributions & Skills Demonstrated  \n- Designed and tested **custom GNN architectures** beyond off-the-shelf models.  \n- Built an **end-to-end experimental framework** (clustering, graph construction, GNN training, evaluation).  \n- Applied **comparative clustering analysis** to mixed-type tabular data.  \n- Developed **imbalance-aware evaluation protocols** (precision–recall balancing, calibration).  \n- Delivered both **technical insights** (graph homophily, cluster alignment) and **practical guidance** (when to use which clustering).  \n\n---\n\n##  Technologies Used  \n- **Python** (NumPy, Pandas, Scikit-learn)  \n- **PyTorch / PyTorch Geometric** (GCN, GAT, custom GNN)  \n- **LightGBM** (baseline)  \n- **Clustering frameworks** (ClusterGAN, k-Prototypes, LCA, hierarchical clustering)  \n- **Visualization**: Matplotlib, Seaborn  \n- **Reproducibility**: Jupyter notebooks, controlled splits  \n\n---\n\n##  Project Structure  \n- `churn-clustergan-k-prototype-1.ipynb` → ClusterGAN + k-Prototypes.  \n- `churn-hierarchical-gower-and-lca.ipynb` → Hierarchical + LCA.  \n- `churn-clustergcn-1.ipynb` → Baseline models, GAT/GCN, custom GNN experiments.  \n\n---\n\n## 🚀 Impact  \nThis project demonstrates how **custom GNN architectures** can be systematically evaluated on real-world datasets. Using clustering as a relational prior boosted model effectiveness, especially for the minority churn class, proving the value of going beyond standard GAT/GCN designs.  \n\nKaggle Notebooks here : \n\nNotebook 1: \nhttps://www.kaggle.com/code/charansv/churn-hierarchical-gower-and-lca\n\nNotebook 2: \nhttps://www.kaggle.com/code/charansv/churn-clustergan-k-prototype-1\n\nNotebook 3: \nhttps://www.kaggle.com/code/charansv/churn-clustergcn-1"
+  },
+  "dataset-1": {
+    "title": "Indian Stock Market & News Feature Factory — Modeling-Ready Parquet with 80+ Engineered Signals",
+    "description": "Build a modeling-ready market dataset by combining equity price data (NSE/BSE) with news-driven sentiment and 80+ engineered features.",
+    "category": "datasets",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/stock-market/tree/main/Dataset%20creation",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": "https://www.kaggle.com/datasets/charansv/nse-stock-data-with-sentiment-and-80-features/data"
+    },
+    "isOngoing": false,
+    "order": 11,
+    "detailedContent": "#  Indian Stock Market & News Feature Factory — Modeling-Ready Parquet with 80+ Engineered Signals\n\n> Build a modeling-ready market dataset by combining **equity price data** (NSE/BSE) with **news-driven sentiment** and engineered features.\n\nThis repo contains three modular notebooks plus concise docs that together form a reproducible pipeline:\n1) **Equity data extraction** → 2) **News sentiment building** → 3) **Final dataset creation & feature engineering**.\n\n---\n\n## TL;DR\n\n- **What this demonstrates**\n  - Practical **ETL** for market data, **NLP** for daily sentiment, and **feature engineering** for ML.\n  - Robustness: **failure logs**, **intermediate saves**, and **idempotent** steps.\n  - Interpretability: a simple **linear model** to learn weights for a **composite sentiment feature**.\n- **What you get**\n  - A **final parquet** with technical indicators, market & macro series, lagged sentiment, and a weighted sentiment metric.\n  - A **feature glossary** explaining every column.\n\n---\n\n## Repo Contents\n\n| File | Purpose |\n|---|---|\n| `equity data extraction.ipynb` | Extract NSE/BSE tickers and fetch historical OHLCV data; logs failures. |\n| `sentiment_scores.ipynb` | Fetch financial news (RSS/GDELT), score with VADER, aggregate per company/day. |\n| `Dataset creation main.ipynb` | Merge, clean, create lags, learn feature weights, and output the final dataset. (feature engineering for all the 80+ signals) |\n| `equity data extraction documentation.md` | Documentation for the equity notebook. |\n| `sentiment scores creation documentation.md` | Documentation for the sentiment notebook. |\n| `main dataset creation documention.md` | Documentation for the final dataset notebook. |\n| `final features.md` | One-line description of **every** final dataset column. |\n\n> Tip: Docs are short and skimmable. Start with **`main dataset creation documention.md`** and **`final features.md`**.\n\n---\n\n## Pipeline Overview\n\n```mermaid\nflowchart LR\n  A[BhavCopy CSVs + NSE_tickers.csv + bse_tickers.csv] --> B[equity data extraction.ipynb]\n  B -->|OHLCV per ticker + failure logs| C[sentiment_scores.ipynb]\n  C -->|daily sentiment per company| D[Dataset creation main.ipynb]\n  D -->|feature weights + final parquet| E[[merged_with_weighted_sentiment_final.parquet]]\n  D --> F[(feature_weights_final.csv)]\n\n\nKaggle Notebooks here :\n\nequity data extraction.ipynb : https://www.kaggle.com/code/charansv/equity-data-extraction\n\nsentiment_scores.ipynb : https://www.kaggle.com/code/charansv/stock-sentiment-scores\n\nDataset creation main.ipynb : https://www.kaggle.com/code/charansv/stock-dataset-creation"
+  },
+  "dataset-2": {
+    "title": "Bangalore Real Estate Data",
+    "description": "Build a fully reproducible pipeline that scrapes listings from popular Indian real-estate portals.(was used only for private educational and research purposes and hence not redistributed)",
+    "category": "datasets",
+    "image": "",
+    "links": {
+      "github": "https://github.com/charan11sv/Bangalore-real-estate",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 13,
+    "detailedContent": "#  Bangalore Real Estate Data – Extraction Notebooks (Simple Documentation)\n\nThis short doc explains how the two notebooks extract Bangalore real-estate data from a **popular local realtor site** for research/internal analysis.\n\n> Notebooks:\n> - `Realtor url extraction.ipynb` — collects listing **detail page URLs** for selected Bangalore localities.\n> - `realtor-dataset-creation.ipynb` — opens each URL and **scrapes structured fields**, then saves a clean dataset.\n\n---\n\n##  Prerequisites\n\n- **Python** 3.9+\n- **Drivers**: Firefox + `geckodriver` (or Chrome + `chromedriver` if you switch the driver)\n- **Libraries**:\n  - `selenium`, `bs4` (BeautifulSoup), `pandas`, `joblib`\n  - Standard: `time`, `json`, `csv`, `os`, `random`\n- (Optional) **Site login**: if the site gates some details behind login/OTP, configure environment variables instead of hardcoding:\n  - `REALTOR_PHONE`, `REALTOR_EMAIL` (and handle OTP manually when prompted)\n\n> **Ethics & Compliance**  \n> - Respect the website’s **Terms of Service** and **robots.txt**.  \n> - Use conservative rate limits and minimal request volume.  \n> - Data is for **internal evaluation**/research; do not redistribute raw content.\n\n---\n\n## Notebook 1 — `Realtor url extraction.ipynb`\n\n###  Goal\nCollect property **detail page URLs** across key Bangalore localities to feed the second notebook.\n\n###  What it does\n1. **Driver setup**  \n   Initializes a Selenium **Firefox** WebDriver (headless optional) and imports helper libs (`selenium`, `bs4`, `joblib`, etc.).\n\n2. **(Optional) Login flow**  \n   Some listing details can require login. The notebook contains a login block (via phone/email) using Selenium waits and basic form interactions.\n   - Replace any hardcoded credentials with **environment variables**.\n   - OTP entry is manual when prompted.\n\n3. **Target localities**  \n   Prepares a list of locality search URLs around Bangalore (e.g., **Yelahanka, Jayanagar, KR Puram, Indiranagar, Koramangala, HSR Layout, Electronic City, Whitefield, Marathahalli, Malleshwaram, Padmanabhanagara, Gandhinagar**).\n\n4. **Pagination & URL capture**  \n   - Visits each locality’s results page, iterates pages (or scrolls) with **explicit waits**.\n   - Parses result cards (via CSS/XPath) and extracts the **property detail links**.\n   - Deduplicates in memory; can periodically save with `joblib`/CSV.\n\n5. **Output**  \n   - Saves a clean list of detail URLs (e.g., `property_urls.json` or `urls.csv`) for the next notebook.\n\n###  Notes & Tips\n- Use **`WebDriverWait + EC`** (expected conditions) rather than fixed sleeps wherever possible.\n- Add **randomized small delays** (`time.sleep(random.uniform(1.0, 2.5))`) to be polite and reduce blocking risk.\n- If the site uses infinite scroll, send `END` key presses to load more cards before scraping.\n\n---\n\n## Notebook 2 — `realtor-dataset-creation.ipynb`\n\n###  Goal\nOpen each detail page URL, extract **structured property attributes**, and build a **tabular dataset**.\n\n###  What it does\n1. **Driver & session management**\n   - Initializes a Selenium driver (Firefox by default).\n   - Rotates **User-Agents** across batches to reduce fingerprinting.\n   - Processes URLs in **batches**, saving intermediate progress so a crash doesn’t lose work:\n     - `property_data.json` — rolling snapshot of scraped records\n     - `processed_urls.json` — set of URLs already processed\n\n2. **Robust page loading**\n   - Uses `WebDriverWait` on document/body and key elements.\n   - Retries on **timeouts**, **stale elements**, or transient network issues.\n   - Light scrolling and a small post-load delay to ensure dynamic elements render.\n\n3. **Field extraction**\n   Extracts a core set of fields (presence depends on the listing):\n   - **Rent** (monthly), **Deposit**\n   - **Total SqFt**\n   - **Location** (neighbourhood / area text)\n   - **Livability Score**, **Transit Score** (if shown on the site)\n   - **URL** (source link)\n   - Additional details captured by iterating **key–value blocks** on the page (e.g., property type, furnishing, floor, facing, bathrooms, parking, etc.) via stable CSS selectors.\n\n   > Example selectors used (anonymized):  \n   > - IDs: `#rent-maintenance`, `#square-ft`, `#emi`  \n   > - Headings/labels & values: `h5.detail-key`, `h5.detail-value`  \n   > - Scores/indicators: `[data-original-title*=\"Livability\"] .score-value`\n\n4. **Cleaning & normalization**\n   - Strips currency symbols (`₹`), units (`/M`, commas), extra whitespace.\n   - Converts numeric fields to `int/float` where possible.\n   - Ensures consistent column names and fills missing values with `None`.\n\n5. **Saving the dataset**\n   - Consolidates all records to a `pandas.DataFrame`.\n   - Writes final CSV: **`realtor_dataset.csv`**.\n   - Keeps the JSON snapshot for audit/reprocessing.\n\n###  Notes & Tips\n- Keep selectors **as semantic as possible**; avoid brittle class-only strategies when the site obfuscates classes.\n- If a field is missing, **catch `NoSuchElementException`** and store `None` to keep schema stable.\n- Tune **batch size** and delays to balance speed vs. reliability.\n\n---\n\n##  How to Run (Quick Start)\n\n1. **Install deps & drivers**\n   ```bash\n   pip install selenium beautifulsoup4 pandas joblib\n   # ensure geckodriver/chromedriver is installed and on PATH\n\n\nKaggle Notebooks: \n\nURL Extraction: https://www.kaggle.com/code/charansv/realtor-url-extraction\n\nDataset Creation: \nhttps://www.kaggle.com/code/charansv/realtor-dataset-creation"
+  },
+  "dataset-3": {
+    "title": "Amazon products dataset",
+    "description": "Extraction amazon products dataset for the LLM induced E-commerce recommendation that we are working on. (was used only for private educational)",
+    "category": "datasets",
+    "image": "",
+    "links": {
+      "github": "",
+      "kaggle": "https://www.kaggle.com/code/charansv/amazon-products-dataset",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 14,
+    "detailedContent": "#  Simple Dataset — AI-Powered E-commerce (Test Set)\n\n## Overview\nThis is a **lightweight sample dataset** created to test an AI-driven e-commerce prototype (search, ranking, and recommendations).  \nIt contains a small, representative set of products with the core attributes needed to validate end-to-end flows.\n\n> Notebook: `Amazon products dataset.ipynb`  \n> Purpose: Generate/clean a compact product dataset for rapid prototyping and model smoke tests.\n\n---\n\n## What’s Inside\n- A few dozen to a few hundred **products** across common categories (e.g., Electronics, Home, Fashion).\n- Cleaned fields suitable for:\n  - **Semantic search & retrieval**\n  - **Ranking experiments** (price, popularity, rating)\n  - **Recommendation prototypes** (category/brand similarity)\n\n---\n\n## Schema (Common Fields)\n| Column              | Type      | Description                                                   |\n|---------------------|-----------|---------------------------------------------------------------|\n| `product_id`        | string    | Stable identifier for the item                               |\n| `title`             | string    | Product name                                                  |\n| `brand`             | string    | Brand/manufacturer (if known)                                 |\n| `category`          | string    | High-level category (e.g., “Electronics > Headphones”)        |\n| `price`             | float     | Current price (numeric, no currency symbol)                   |\n| `currency`          | string    | ISO code (e.g., `INR`, `USD`)                                 |\n| `rating`            | float     | Average rating (0–5)                                          |\n| `rating_count`      | integer   | Number of ratings/reviews                                     |\n| `features`          | string[]  | Key bullet points/specs                                       |\n| `description`       | string    | Short textual description (for embedding tests)               |\n| `image_url`         | string    | Representative image link (optional)                          |\n| `product_url`       | string    | Source/product page link (optional)                           |\n| `in_stock`          | boolean   | Availability flag                                             |\n| `created_at`        | datetime  | Record creation timestamp                                     |\n\n> Notes  \n> - Text fields (`title`, `description`, `features`) are designed for **embedding-based** search tests.  \n> - Numeric fields (`price`, `rating`, `rating_count`) support **sorting/ranking** experiments.\n\n---\n\n## File(s)\n- **`amazon_products.csv`** — main dataset (CSV, UTF-8)\n- **`amazon_products.jsonl`** *(optional)* — same records in JSON Lines format\n\n---\n\nKaggle Notebook: \nhttps://www.kaggle.com/code/charansv/amazon-products-dataset"
+  },
+  "dataset-4": {
+    "title": "Research paper text extraction for finetuning",
+    "description": "This was used only for private educational and research purposes and never redistributed.",
+    "category": "datasets",
+    "image": "",
+    "links": {
+      "github": "",
+      "kaggle": "https://www.kaggle.com/charansv/",
+      "googleDocs": "",
+      "dataset": ""
+    },
+    "isOngoing": false,
+    "order": 12,
+    "detailedContent": "#  Research Papers Dataset — Notebook Docs \n\n### Notebooks\n- **`Research publishings extraction.ipynb`** — discovers papers and collects **metadata**, **PDF/HTML links**, and **raw text** (when permitted).\n- **`512-data-extraction.ipynb`** — cleans, normalizes, and **chunks** text (≈512-token windows) to create **training-ready JSONL** for open-source LLM fine-tuning.\n\n### What they do (at a glance)\n\n1. **Discover & Collect**\n   - Query research indexes/publisher pages for target topics/keywords.\n   - Respect `robots.txt`, apply polite **rate limits** and retries.\n   - Store metadata: `paper_id`, `title`, `authors`, `year`, `venue`, `doi`, `url`, `pdf_url`, `license?`, `abstract`.\n\n2. **Fetch & Parse**\n   - Download HTML/PDF **only when allowed**.\n   - Parse HTML (BeautifulSoup) or PDF (pdfminer/pymupdf) → plain text.\n   - Normalize whitespace; optionally strip boilerplate (headers/footers/references).\n\n3. **Validate & Deduplicate**\n   - Drop duplicates by **DOI** or hash of `(title+authors+year)`.\n   - Filter corrupted/short texts; keep language of interest (e.g., `en`).\n\n4. **Clean & Segment (512-data-extraction)**\n   - Section-aware splitting when possible (Abstract, Intro, Methods, …).\n   - Tokenize and **chunk to ~512 tokens** with small overlaps to preserve context.\n   - Add provenance fields (`source`, `crawl_time`, `checksum`, `source_license`).\n\n5. **Save Training Files**\n   - **Pretraining style**: one `text` field per chunk.  \n   - **Optional SFT formats** (if you generate targets): e.g., summarization or QA tuples.\n   - Outputs:\n     - `papers_raw.jsonl` — metadata + raw text (per paper)\n     - `papers_clean.jsonl` — cleaned text + normalized metadata\n     - `papers_chunks.jsonl` — chunked text for training\n     - *(optional)* task-specific JSONL for SFT\n\nKaggle Notebooks:\n\n512-data-extraction.ipynb : \nhttps://www.kaggle.com/code/charansv/512-research-data-extraction\n\nResearch publishings extraction.ipynb :\nhttps://www.kaggle.com/code/charansv/research-publishing-data-extraction"
+  }
+};
+
+// Utility function to convert markdown to HTML using marked.js
+function convertMarkdownToHTML(markdown) {
+  if (!markdown) return '';
+  
+  console.log('Converting markdown to HTML...');
+  console.log('Marked library available:', typeof marked !== 'undefined');
+  console.log('Markdown content preview:', markdown.substring(0, 200) + '...');
+  console.log('Looking for URLs in full content...');
+  const allUrls = markdown.match(/(https?:\/\/[^\s]+)/gim);
+  console.log('All URLs found in content:', allUrls);
+  
+  // Configure marked for better rendering (similar to the original React app)
+  if (typeof marked !== 'undefined') {
+    try {
+      marked.setOptions({
+        breaks: true,
+        gfm: true,
+        sanitize: false
+      });
+      
+      // Add custom renderer to handle plain URLs
+      const renderer = new marked.Renderer();
+      renderer.link = function(href, title, text) {
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+      };
+      
+      // Convert plain URLs to markdown links before parsing
+      console.log('Original markdown length:', markdown.length);
+      console.log('Looking for URLs in markdown...');
+      
+      // First, protect code blocks from URL processing
+      const codeBlocks = [];
+      let processedMarkdown = markdown.replace(/```[\s\S]*?```/g, (match, index) => {
+        const placeholder = `__CODE_BLOCK_${codeBlocks.length}__`;
+        codeBlocks.push(match);
+        return placeholder;
+      });
+      
+      console.log('Code blocks found:', codeBlocks.length);
+      
+      // Now process URLs outside of code blocks
+      const urlMatches = processedMarkdown.match(/(https?:\/\/[^\s]+)/gim);
+      console.log('URLs found:', urlMatches);
+      
+      // Process URLs with better handling for multiple URLs on same line
+      // Only process plain URLs that are not already in markdown link format
+      // Skip URL processing for this project since we want plain URLs
+      // processedMarkdown = processedMarkdown.replace(/(?<!\]\()https?:\/\/[^\s\)\]]+(?!\))/gim, '[$&]($&)');
+      
+      // Restore code blocks
+      codeBlocks.forEach((block, index) => {
+        processedMarkdown = processedMarkdown.replace(`__CODE_BLOCK_${index}__`, block);
+      });
+      
+      console.log('Processed markdown length:', processedMarkdown.length);
+      
+      const result = marked.parse(processedMarkdown, { renderer: renderer });
+      console.log('Markdown converted successfully');
+      return result;
+    } catch (error) {
+      console.error('Error parsing markdown:', error);
+      return '<p>Error parsing markdown content.</p>';
+    }
+  } else {
+    // Fallback to basic parsing if marked.js is not loaded
+    console.warn('marked.js not loaded, using fallback markdown parser');
+    console.log('Fallback parser - Original markdown length:', markdown.length);
+    console.log('Fallback parser - Looking for URLs...');
+    const urlMatches = markdown.match(/(https?:\/\/[^\s]+)/gim);
+    console.log('Fallback parser - URLs found:', urlMatches);
+  return markdown
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+      .replace(/`([^`]+)`/gim, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/gim, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/(https?:\/\/[^\s]+)/gim, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/^[\s]*[-*] (.*$)/gim, '<li>$1</li>')
+      .replace(/^[\s]*\d+\. (.*$)/gim, '<li>$1</li>')
+      .replace(/\n\n+/gim, '</p><p>')
+    .replace(/\n/gim, '<br>')
+      .replace(/^(?!<[h|p|d|b|l|h])/gim, '<p>')
+      .replace(/(?<!>)$/gim, '</p>')
+      .replace(/<p><\/p>/gim, '')
+      .replace(/<p><br><\/p>/gim, '');
+  }
+}
+
+// Smooth scrolling function
+function scrollToSection(sectionId) {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+// Modal functions
+function openProjectModal(projectId) {
+  console.log('=== openProjectModal called ===');
+  console.log('Project ID:', projectId);
+  console.log('Projects object exists:', typeof projects !== 'undefined');
+  console.log('Projects object:', typeof projects, projects);
+  
+  if (typeof projects === 'undefined') {
+    alert('Projects object not loaded! Check console for errors.');
+    return;
+  }
+  
+  const project = projects[projectId];
+  console.log('Project found:', project);
+  
+  if (!project) {
+    console.error('Project not found for ID:', projectId);
+    console.log('Available project IDs:', Object.keys(projects));
+    alert('Project details not found. Please try again.');
+    return;
+  }
+  
+  const modal = document.getElementById('projectModal');
+  const details = document.getElementById('projectDetails');
+  
+  console.log('Modal element:', modal);
+  console.log('Details element:', details);
+  
+  if (!modal || !details) {
+    console.error('Modal elements not found');
+    alert('Modal elements not found. Please refresh the page.');
+    return;
+  }
+  
+  try {
+    // Show loading state first
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    details.innerHTML = `
+      <h2 class="project-details-title">${project.title}</h2>
+      <div class="project-details-description">
+        <p>${project.description}</p>
+      </div>
+      <div class="detailed-content markdown-content">
+        <div style="text-align: center; padding: 2rem;">
+          <div style="display: inline-block; width: 20px; height: 20px; border: 2px solid #f3f3f3; border-top: 2px solid #3b82f6; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+          <p style="margin-top: 1rem; color: var(--text-secondary);">Loading detailed content...</p>
+        </div>
+      </div>
+    `;
+    
+    // Add CSS for loading animation
+    if (!document.getElementById('loading-styles')) {
+      const style = document.createElement('style');
+      style.id = 'loading-styles';
+      style.textContent = `
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+    
+    // Process markdown content asynchronously
+    setTimeout(() => {
+      try {
+        // Project links are already shown on the project cards, so we don't need them in the modal
+        
+        const markdownContent = convertMarkdownToHTML(project.detailedContent || 'No detailed content available.');
+        
+        
+        details.innerHTML = `
+          <h2 class="project-details-title">${project.title}</h2>
+          <div class="project-details-description">
+            <p>${project.description}</p>
+          </div>
+          <div class="detailed-content markdown-content">
+            ${markdownContent}
+          </div>
+        `;
+        
+        console.log('Modal content loaded successfully');
+      } catch (error) {
+        console.error('Error processing markdown content:', error);
+    details.innerHTML = `
+      <h2 class="project-details-title">${project.title}</h2>
+      <div class="project-details-description">
+        <p>${project.description}</p>
+      </div>
+      <div class="detailed-content">
+            <p>Error loading detailed content. Please try again.</p>
+      </div>
+    `;
+      }
+    }, 100); // Small delay to show loading state
+    
+    console.log('Modal displayed successfully');
+  } catch (error) {
+    console.error('Error displaying modal:', error);
+    details.innerHTML = `
+      <h2 class="project-details-title">${project.title}</h2>
+      <div class="project-details-description">
+        <p>${project.description}</p>
+      </div>
+      <div class="detailed-content">
+        <p>Error loading detailed content. Please try again.</p>
+      </div>
+    `;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeProjectModal() {
+  const modal = document.getElementById('projectModal');
+  modal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+  const modal = document.getElementById('projectModal');
+  if (event.target === modal) {
+    closeProjectModal();
+  }
+}
+
+// Add fade-in animation to sections
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded, projects object:', projects);
+  console.log('Available project keys:', Object.keys(projects));
+  
+  const sections = document.querySelectorAll('.section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+});
+
+// Add smooth scrolling to all anchor links
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('=== DOM Content Loaded ===');
+  console.log('Script loaded successfully');
+  console.log('Projects object:', typeof projects);
+  console.log('openProjectModal function:', typeof openProjectModal);
+  console.log('testJS function:', typeof testJS);
+  
+  const links = document.querySelectorAll('a[href^="#"]');
+  links.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      scrollToSection(targetId);
+    });
+  });
+});
+
+// Final test
+console.log('Script execution completed');
+console.log('All functions available:', {
+  testJS: typeof testJS,
+  openProjectModal: typeof openProjectModal,
+  projects: typeof projects
+});
